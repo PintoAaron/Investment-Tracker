@@ -30,10 +30,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['investment-tracker-w31a.onrender.com']
+
+ALLOWED_HOSTS = ['investment-tracker-e8hi.onrender.com', 'localhost']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://investment-tracker-w31a.onrender.com',
+    'https://investment-tracker-e8hi.onrender.com/',
 ]
 
 # CSRF_COOKIE_SECURE = True
