@@ -30,10 +30,14 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['investment-tracker-w31a.onrender.com']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://investment-tracker-w31a.onrender.com',
+]
 
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 # Application definition
 
 INSTALLED_APPS = [
