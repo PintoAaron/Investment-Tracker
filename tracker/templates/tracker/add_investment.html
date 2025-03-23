@@ -1,0 +1,44 @@
+{% extends 'tracker/base.html' %}
+{% load form_tags %}
+{% block title %}Add Investment{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-4">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Add New Investment</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form.name.label_tag }}
+            {{ form.name|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.amount_invested.label_tag }}
+            {{ form.amount_invested|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.period.label_tag }}
+            {{ form.period|add_class:"form-select" }}
+          </div>
+          <div class="mb-3">
+            {{ form.date_invested.label_tag }}
+            {{ form.date_invested|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.url.label_tag }}
+            {{ form.url|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.description.label_tag }}
+            {{ form.description|add_class:"form-control" }}
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-success" type="submit">Save Investment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

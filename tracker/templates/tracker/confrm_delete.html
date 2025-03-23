@@ -1,0 +1,13 @@
+{% extends 'tracker/base.html' %}
+{% block title %}Delete Investment{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Delete Investment</h2>
+  <p class="text-center">Are you sure you want to delete the investment <strong>{{ investment.name }}</strong>?</p>
+  <form method="post" class="text-center">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="{% url 'list_investments' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

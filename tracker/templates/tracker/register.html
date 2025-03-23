@@ -1,0 +1,36 @@
+{% extends 'tracker/base.html' %}
+{% load form_tags %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-4">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Create an Account</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form.username.label_tag }}
+            {{ form.username|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.email.label_tag }}
+            {{ form.email|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.password1.label_tag }}
+            {{ form.password1|add_class:"form-control" }}
+          </div>
+          <div class="mb-3">
+            {{ form.password2.label_tag }}
+            {{ form.password2|add_class:"form-control" }}
+          </div>
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

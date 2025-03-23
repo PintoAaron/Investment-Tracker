@@ -1,0 +1,11 @@
+{% extends 'tracker/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="dashboard-container text-white text-center">
+  <div class="overlay">
+    <h1 class="display-4 fw-bold">Build Wealth Gradually</h1>
+    <p class="lead">Track your investments and grow your savings over time.</p>
+    <a class="btn btn-success btn-lg mt-3" href="{% url 'add_investment' %}">Add Investment</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'tracker/base.html' %}
+{% block title %}Edit Investment{% endblock %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Edit Investment</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="name" class="form-label">Investment Name</label>
+      <input type="text" class="form-control" id="name" name="name" value="{{ investment.name }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="amount_invested" class="form-label">Amount</label>
+      <input type="number" class="form-control" id="amount_invested" name="amount_invested" value="{{ investment.amount_invested }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="url" class="form-label">Investment Website</label>
+      <input type="url" class="form-control" id="url" name="url" value="{{ investment.url }}">
+    </div>
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="active" name="active" {% if investment.active %}checked{% endif %}>
+      <label class="form-check-label" for="active">Active</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="{% url 'list_investments' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

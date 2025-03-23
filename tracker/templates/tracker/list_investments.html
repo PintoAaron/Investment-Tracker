@@ -1,0 +1,68 @@
+{% extends 'tracker/base.html' %}
+{% block title %}Investments{% endblock %}
+{% block content %}
+<div class="list-investments-container">
+  <div class="overlay">
+    <div class="container mt-5">
+      <h2 class="text-center mb-4 text-highlight">Your Investments</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover bg-white">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Investment Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Period</th>
+              <th scope="col">Date Invested</th>
+              <th scope="col">Website</th> <!-- Added Website header -->
+              <th scope="col">Active</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for investment in investments %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ investment.name }}</td>
+              <td>GHc {{ investment.amount_invested }}</td>
+              <td>{{ investment.period }}</td> <!-- Display the period -->
+              <td>{{ investment.date_invested }}</td>
+              <td>
+                {% if investment.url %}
+                <a href="{{ investment.url }}" target="_blank" class="btn btn-link">Visit</a>
+                {% else %}
+                <span class="text-muted">N/A</span>
+                {% endif %}
+              </td>
+              <td>
+                <span class="badge {% if investment.active %}bg-success{% else %}bg-danger{% endif %}">
+                  {% if investment.active %}Active{% else %}Inactive{% endif %}
+                </span>
+              </td>
+              <td>
+                <!-- Edit Button -->
+                <a href="{% url 'edit_investment' investment.id %}" class="btn btn-primary btn-sm">Edit</a>
+                <!-- Delete Button -->
+                <form method="post" action="{% url 'delete_investment' investment.id %}" style="display: inline;">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center">No investments found.</td> <!-- Updated colspan to 7 -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add Investment Button -->
+      <div class="text-center mt-4">
+        <a class="btn btn-success btn-lg" href="{% url 'add_investment' %}">Add New Investment</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
