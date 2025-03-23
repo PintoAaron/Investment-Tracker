@@ -36,9 +36,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://investment-tracker-w31a.onrender.com',
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-# Application definition
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -126,6 +126,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
