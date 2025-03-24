@@ -24,7 +24,7 @@ class Investment(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    amount_invested = models.DecimalField(max_digits=5, decimal_places=2)
+    amount_invested = models.DecimalField(max_digits=10, decimal_places=2)
     period = models.CharField(max_length=20, choices=PERIOD_CHOICES, default='Monthly')
     date_invested = models.DateField()
     description = models.TextField(null=True, blank=True)
