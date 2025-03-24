@@ -34,7 +34,7 @@ def add_investment(request):
             investment = form.save(commit=False)
             investment.user = request.user
             investment.save()
-            return redirect('dashboard')
+            return redirect('list_investments')
     else:
         form = InvestmentForm()
     return render(request, 'tracker/add_investment.html', {'form': form})

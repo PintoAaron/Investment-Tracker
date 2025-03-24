@@ -9,6 +9,15 @@
         <h2 class="text-center mb-4">Add New Investment</h2>
         <form method="post" novalidate>
           {% csrf_token %}
+          {% if form.errors %}
+            <div class="alert alert-danger">
+              <ul>
+                {% for field, errors in form.errors.items %}
+                  <li>{{ field }}: {{ errors|join:", " }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
           <div class="mb-3">
             {{ form.name.label_tag }}
             {{ form.name|add_class:"form-control" }}
