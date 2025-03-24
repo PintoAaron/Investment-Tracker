@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['investment-tracker-e8hi.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['investment-tracker-e8hi.onrender.com', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://investment-tracker-e8hi.onrender.com/',
