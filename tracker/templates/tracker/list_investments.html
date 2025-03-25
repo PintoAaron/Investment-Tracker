@@ -5,6 +5,12 @@
   <div class="overlay">
     <div class="container mt-5">
       <h2 class="text-center mb-4 text-highlight">Your Investments</h2>
+      <div class="d-flex justify-content-end mb-2">
+        <!-- Toggle Visibility Button -->
+        <button id="toggle-amount-visibility" class="btn btn-outline-secondary">
+          <i id="visibility-icon" class="bi bi-eye"></i> <!-- Bootstrap eye icon -->
+        </button>
+      </div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover bg-white">
           <thead class="table-light">
@@ -14,7 +20,7 @@
               <th scope="col">Amount</th>
               <th scope="col">Period</th>
               <th scope="col">Date Invested</th>
-              <th scope="col">Website</th> <!-- Added Website header -->
+              <th scope="col">Website</th>
               <th scope="col">Active</th>
               <th scope="col">Actions</th>
             </tr>
@@ -24,8 +30,8 @@
             <tr>
               <th scope="row">{{ forloop.counter }}</th>
               <td>{{ investment.name }}</td>
-              <td>GHc {{ investment.amount_invested }}</td>
-              <td>{{ investment.period }}</td> <!-- Display the period -->
+              <td class="amount-cell">GHc {{ investment.amount_invested }}</td>
+              <td>{{ investment.period }}</td>
               <td>{{ investment.date_invested }}</td>
               <td>
                 {% if investment.url %}
@@ -40,9 +46,7 @@
                 </span>
               </td>
               <td>
-                <!-- Edit Button -->
                 <a href="{% url 'edit_investment' investment.id %}" class="btn btn-primary btn-sm">Edit</a>
-                <!-- Delete Button -->
                 <form method="post" action="{% url 'delete_investment' investment.id %}" style="display: inline;">
                   {% csrf_token %}
                   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -51,18 +55,46 @@
             </tr>
             {% empty %}
             <tr>
-              <td colspan="7" class="text-center">No investments found.</td> <!-- Updated colspan to 7 -->
+              <td colspan="8" class="text-center">No investments found.</td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
 
-      <!-- Add Investment Button -->
       <div class="text-center mt-4">
         <a class="btn btn-success btn-lg" href="{% url 'add_investment' %}">Add New Investment</a>
       </div>
     </div>
   </div>
 </div>
+
+<!-- JavaScript for toggling visibility -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const toggleButton = document.getElementById('toggle-amount-visibility');
+    const visibilityIcon = document.getElementById('visibility-icon');
+    const amountCells = document.querySelectorAll('.amount-cell');
+
+    let isVisible = true;
+
+    toggleButton.addEventListener('click', function () {
+      isVisible = !isVisible;
+
+      amountCells.forEach(cell => {
+        if (isVisible) {
+          // Restore the original amount
+          cell.textContent = cell.getAttribute('data-original-amount');
+        } else {
+          // Replace with asterisks
+          cell.setAttribute('data-original-amount', cell.textContent.trim());
+          cell.textContent = '****';
+        }
+      });
+
+      // Update the icon
+      visibilityIcon.className = isVisible ? 'bi bi-eye' : 'bi bi-eye-slash';
+    });
+  });
+</script>
 {% endblock %}
